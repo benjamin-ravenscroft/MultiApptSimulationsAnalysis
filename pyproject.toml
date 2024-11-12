@@ -10,6 +10,7 @@ python = "^3.10"
 pandas = "^2.2.3"
 ipykernel = "^6.29.5"
 pyarrow = "^18.0.0"
+typer = "^0.13.0"
 
 
 [build-system]
