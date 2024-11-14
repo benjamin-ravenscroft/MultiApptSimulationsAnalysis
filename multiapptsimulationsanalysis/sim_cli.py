@@ -37,7 +37,8 @@ def get_mean_summary(df, runs, arr_lam, arrival_probabilities, pathways, wait_ef
     return res
 
 
-def main(sim_name: Annotated[str, typer.Option(help="Name of the simulation.")]="test",
+def main(program_path: Annotated[str, typer.Option(help="Path to simulation executable")]="",
+         sim_name: Annotated[str, typer.Option(help="Name of the simulation.")]="test",
          directory: Annotated[str, typer.Option(help="Directory to save simulation results.")]="",
          runs: Annotated[int, typer.Option(help="Number of runs.")]=5,
          epochs: Annotated[int, typer.Option(help="Number of epochs per run.")]=10000,
@@ -83,19 +84,19 @@ def main(sim_name: Annotated[str, typer.Option(help="Name of the simulation.")]=
              typer.Option(help="Output folder for summary file.")
         ]="/mnt/d/OneDrive - University of Waterloo/KidsAbility Research/Service Duration Analysis/C++ Simulations/test_summary/"):
     
-    folder = folder + f"{directory}/" + sim_name + "/"
+    # folder = folder + f"{directory}/" + sim_name + "/"
     # define path to C executable
-    program_path = "/home/benja/kidsAbility/MultiApptSimulations/build/simulation"
 
     # define the program call
     program_call = [program_path]
     program_call += [f"--runs={runs}", f"--n_epochs={epochs}", f"--clinicians={clinicians}"]
-    program_call += [f"--max_caseload={max_caseload}", f"--arr_lam={arr_lam}", f"--folder={directory}/{sim_name}/"]
+    program_call += [f"--max_caseload={max_caseload}", f"--arr_lam={arr_lam}"]
     program_call += [f" --pathways={','.join(map(str, pathways))}", f"--wait_effects={','.join(map(str, wait_effects))}"]
     program_call += [f"--modality_effects={','.join(map(str, modality_effects))}", f"--modality_policies={','.join(map(str, modality_policies))}"]
     program_call += [f" --max_ax_age={max_ax_age}", f"--age_params={','.join(map(str, age_params))}"]
     program_call += [f"--priority_order={','.join(map(str, priority_order))}", f"--priority_wlist={priority_wlist}"]
     program_call += [f"--arrival_probs={','.join(map(str, arrival_probabilities))}"]
+    program_call += [f"--folder={folder}"]
     
     # call the program as a subprocess and wait
     p1 = subprocess.Popen(program_call)
