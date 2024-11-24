@@ -12,6 +12,9 @@ ipykernel = "^6.29.5"
 pyarrow = "^18.0.0"
 typer = "^0.13.0"
 python-dotenv = "^1.0.1"
+tqdm = "^4.67.0"
+matplotlib = "^3.9.2"
+seaborn = "^0.13.2"
 
 
 [build-system]
